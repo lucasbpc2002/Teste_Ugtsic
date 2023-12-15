@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<body>
+<h1>Teste de Desenvolvimento - UGTSIC - SESAP/RN</h1>
+
+<form th:object="${curriculo}" th:action="@{/formulario/submit}" method="post" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label for="nome" class="form-label">Nome:</label>
+        <input type="text" id="nome" th:field="*{nome}" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">E-mail:</label>
+        <input type="text" id="email" th:field="*{email}" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label for="telefone" class="form-label">Telefone:</label>
+        <input type="text" id="telefone" th:field="*{telefone}" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label for="cargo" class="form-label">Cargo desejado:</label>
+        <input type="text" id="cargo" th:field="*{cargo_desejado}" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="categoria" class="form-label">Escolaridade:</label>
+        <select id="categoria" th:field="*{escolaridade}" class="form-select" required>
+            <option value="Ensino Fundamental Incompleto">Ensino Fundamental Incompleto</option>
+            <option value="Ensino Fundamental Cursando">Ensino Fundamental Cursando</option>
+            <option value="Ensino Fundamental Completo">Ensino Fundamental Completo</option>
+            <option value="Ensino Médio Incompleto">Ensino Médio Incompleto</option>
+            <option value="Ensino Médio Cursando">Ensino Médio Cursando</option>
+            <option value="Ensino Médio Completo">Ensino Médio Completo</option>
+            <option value="Formação Superior Incompleta">Formação Superior Incompleta</option>
+            <option value="Formação Superior Cursando">Formação Superior Cursando</option>
+            <option value="Formação Superior Completa">Formação Superior Completa</option>
+            <option value="Pós-graduação no nível Especialização">Pós-graduação no nível Especialização</option>
+            <option value="Pós-graduação no nível Mestrado">Pós-graduação no nível Mestrado</option>
+            <option value="Pós-graduação no nível Dotourado">Pós-graduação no nível Dotourado</option>
+            <option value="outro">Outro</option>
+            <!-- Adicione mais opções de categoria aqui -->
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label for="obs" class="form-label">Observações:</label>
+        <input type="text" id="obs" th:field="*{observacoes}" class="form-control">
+    </div>
+
+    <input type="submit" value="Enviar">
+</form>
+
+</body>
+</html>
