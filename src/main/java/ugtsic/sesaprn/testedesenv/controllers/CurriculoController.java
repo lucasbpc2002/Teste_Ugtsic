@@ -8,6 +8,7 @@ import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -38,20 +39,33 @@ public class CurriculoController {
 
             System.out.println(file);
 
-             if (file != null && !file.isEmpty()) {
-                String fileName = file.getOriginalFilename();
-                fileStorageService.save(file);
-                curriculo.setArquivo(fileName);
-                 System.out.println(curriculo);
+        if (file != null && !file.isEmpty()) {
+            // Verificar extensão do arquivo
+            String fileExtension = StringUtils.getFilenameExtension(file.getOriginalFilename());
+            if (!isValidFileExtension(fileExtension)) {
+                redirectAttributes.addFlashAttribute("mensagem", "Apenas arquivos .doc, .docx ou .pdf são permitidos.");
+                return "redirect:/ok";
+            }
 
-                 curriculoService.saveCurriculum(curriculo);
+            String fileName = file.getOriginalFilename();
+            fileStorageService.save(file);
 
-                 redirectAttributes.addFlashAttribute("mensagem", "Operação concluída com sucesso.");
-             }else{
-                 redirectAttributes.addFlashAttribute("mensagem", "Operação não foi concluida.");
-             }
+            curriculo.setArquivo(fileName);
+
+            System.out.println(curriculo);
+
+            curriculoService.saveCurriculum(curriculo);
+
+            redirectAttributes.addFlashAttribute("mensagem", "Operação concluída com sucesso.");
+        } else {
+            redirectAttributes.addFlashAttribute("mensagem", "Operação não foi concluída.");
+        }
 
         return "redirect:/ok";
     }
 
+    private boolean isValidFileExtension(String extension) {
+        // Adicione ou remova as extensões permitidas conforme necessário
+        return "doc".equalsIgnoreCase(extension) || "docx".equalsIgnoreCase(extension) || "pdf".equalsIgnoreCase(extension);
+    }
 }
