@@ -31,6 +31,8 @@ public class CurriculoController {
         this.fileStorageService = fileStorageService;
     }
 
+    private static final long MAX_FILE_SIZE = 1024 * 1024; // 1MB
+
     @PostMapping("/submit")
     public String submitCurriculum(@ModelAttribute @Valid Curriculo curriculo, Errors errors, @RequestParam(name = "arquivo", required = false) MultipartFile file, HttpServletRequest request, HttpServletResponse response,  RedirectAttributes redirectAttributes) throws IOException{
 
@@ -40,6 +42,12 @@ public class CurriculoController {
             System.out.println(file);
 
         if (file != null && !file.isEmpty()) {
+            // Verificar tamanho do arquivo
+            if (file.getSize() > MAX_FILE_SIZE) {
+                redirectAttributes.addFlashAttribute("mensagem", "O tamanho do arquivo não pode ser maior que 1MB.");
+                return "redirect:/ok";
+            }
+
             // Verificar extensão do arquivo
             String fileExtension = StringUtils.getFilenameExtension(file.getOriginalFilename());
             if (!isValidFileExtension(fileExtension)) {
@@ -49,9 +57,7 @@ public class CurriculoController {
 
             String fileName = file.getOriginalFilename();
             fileStorageService.save(file);
-
             curriculo.setArquivo(fileName);
-
             System.out.println(curriculo);
 
             curriculoService.saveCurriculum(curriculo);

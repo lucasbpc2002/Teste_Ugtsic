@@ -16,3 +16,11 @@ server:
   port: 8080
   servlet:
     context-path: /
+    multipart:
+      max-file-size: 1MB
+      max-request-size: 1MB
+  tomcat:
+    max-swallow-size: 1MB
+  error:
+    whitelabel:
+      enabled: false
