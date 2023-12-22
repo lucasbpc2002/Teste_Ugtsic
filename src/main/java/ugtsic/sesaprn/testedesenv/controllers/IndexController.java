@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import ugtsic.sesaprn.testedesenv.models.Curriculo;
 
 @Controller
-public class Index {
+public class IndexController {
 
     @RequestMapping(value = {"/", "/home","/index"}, method = RequestMethod.GET)
     public String getIndex(Model model) {
@@ -16,4 +16,10 @@ public class Index {
         return "index";
     }
 
+    @RequestMapping(value = {"/ok"}, method = RequestMethod.GET)
+    public String getOk() {
+        return "mensagem";
+    }
+
 }
+

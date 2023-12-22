@@ -5,6 +5,9 @@
     <title>Title</title>
 </head>
 <body>
-<h1>DEU CERTO</h1>
+<div th:if="${mensagem}">
+    <h1 th:text="${mensagem}"></h1>
+</div>
+
 </body>
 </html>

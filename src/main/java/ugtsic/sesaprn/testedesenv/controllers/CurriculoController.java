@@ -8,13 +8,13 @@ import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ugtsic.sesaprn.testedesenv.models.Curriculo;
 import ugtsic.sesaprn.testedesenv.services.CurriculoService;
+import ugtsic.sesaprn.testedesenv.services.FileStorageService;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -24,19 +24,34 @@ import java.time.LocalDateTime;
 public class CurriculoController {
     CurriculoService curriculoService;
 
-        public CurriculoController(CurriculoService curriculoService){
+    FileStorageService fileStorageService;
+    public CurriculoController(CurriculoService curriculoService, FileStorageService fileStorageService){
         this.curriculoService = curriculoService;
+        this.fileStorageService = fileStorageService;
     }
 
     @PostMapping("/submit")
-    public String submitCurriculum(@ModelAttribute @Valid Curriculo curriculo, HttpServletRequest request, HttpServletResponse response) {
-        curriculo.setIpAddress(request.getRemoteAddr());
-        curriculo.setSubmissionDateTime(LocalDateTime.now());
+    public String submitCurriculum(@ModelAttribute @Valid Curriculo curriculo, Errors errors, @RequestParam(name = "arquivo", required = false) MultipartFile file, HttpServletRequest request, HttpServletResponse response,  RedirectAttributes redirectAttributes) throws IOException{
 
-        System.out.println(curriculo);
-        curriculoService.saveCurriculum(curriculo);
+            curriculo.setIpAddress(request.getRemoteAddr());
+            curriculo.setSubmissionDateTime(LocalDateTime.now());
 
-        return "submission-success";
+            System.out.println(file);
+
+             if (file != null && !file.isEmpty()) {
+                String fileName = file.getOriginalFilename();
+                fileStorageService.save(file);
+                curriculo.setArquivo(fileName);
+                 System.out.println(curriculo);
+
+                 curriculoService.saveCurriculum(curriculo);
+
+                 redirectAttributes.addFlashAttribute("mensagem", "Operação concluída com sucesso.");
+             }else{
+                 redirectAttributes.addFlashAttribute("mensagem", "Operação não foi concluida.");
+             }
+
+        return "redirect:/ok";
     }
 
 }

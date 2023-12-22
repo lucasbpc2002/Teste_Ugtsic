@@ -1,57 +1,124 @@
 <!DOCTYPE html>
-<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <title>Index</title>
+
+    <style>
+        .masthead {
+            height: 100%;
+            min-height: 100%;
+            background-image: url("https://www.sitegratisgratis.com.br/wp-content/uploads/2017/03/wallpaper-azul-papel-de-parede-azul-fundo-14.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .logo{
+            max-width: 40%;
+        }
+    </style>
 </head>
-<body>
-<h1>Teste de Desenvolvimento - UGTSIC - SESAP/RN</h1>
+
+<body class="masthead">
 
 <form th:object="${curriculo}" th:action="@{/curriculo/submit}" method="post" enctype="multipart/form-data">
-    <div class="mb-3">
-        <label for="nome" class="form-label">Nome:</label>
-        <input type="text" id="nome" th:field="*{nome}" class="form-control" required>
-    </div>
-    <div class="mb-3">
-        <label for="email" class="form-label">E-mail:</label>
-        <input type="text" id="email" th:field="*{email}" class="form-control" required>
-    </div>
-    <div class="mb-3">
-        <label for="telefone" class="form-label">Telefone:</label>
-        <input type="text" id="telefone" th:field="*{telefone}" class="form-control" required>
-    </div>
-    <div class="mb-3">
-        <label for="cargo" class="form-label">Cargo desejado:</label>
-        <input type="text" id="cargo" th:field="*{cargo_desejado}" class="form-control" required>
-    </div>
+    <section >
+        <div class="container py-5 h-100">
+            <div class="row justify-content-center align-items-center h-100">
+                <div class="col-12 col-lg-9 col-xl-7">
+                    <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+                        <div class="card-body p-4 p-md-5">
+                            <h2 class="row justify-content-center align-items-center h-100 mb-4 pb-2 pb-md-0 mb-md-5"><img class="logo" src="https://tse4.mm.bing.net/th?id=OIP.hD5vgA54wmGTj4F36GLXKQHaC2&pid=Api&P=0&h=180"> Formulário para currículo</h2>
+                            <form>
+                                <div class="row">
+                                    <div class="col-md-6 mb-4">
 
-    <div class="mb-3">
-        <label for="categoria" class="form-label">Escolaridade:</label>
-        <select id="categoria" th:field="*{escolaridade}" class="form-select" required>
-            <option value="Ensino Fundamental Incompleto">Ensino Fundamental Incompleto</option>
-            <option value="Ensino Fundamental Cursando">Ensino Fundamental Cursando</option>
-            <option value="Ensino Fundamental Completo">Ensino Fundamental Completo</option>
-            <option value="Ensino Médio Incompleto">Ensino Médio Incompleto</option>
-            <option value="Ensino Médio Cursando">Ensino Médio Cursando</option>
-            <option value="Ensino Médio Completo">Ensino Médio Completo</option>
-            <option value="Formação Superior Incompleta">Formação Superior Incompleta</option>
-            <option value="Formação Superior Cursando">Formação Superior Cursando</option>
-            <option value="Formação Superior Completa">Formação Superior Completa</option>
-            <option value="Pós-graduação no nível Especialização">Pós-graduação no nível Especialização</option>
-            <option value="Pós-graduação no nível Mestrado">Pós-graduação no nível Mestrado</option>
-            <option value="Pós-graduação no nível Dotourado">Pós-graduação no nível Dotourado</option>
-            <option value="outro">Outro</option>
-            <!-- Adicione mais opções de categoria aqui -->
-        </select>
-    </div>
+                                        <div class="form-outline">
+                                            <h6 for="nome" class="form-label">Nome:</h6>
+                                            <input type="text" id="nome" th:field="*{nome}" class="form-control" required>
+                                        </div>
 
-    <div class="mb-3">
-        <label for="obs" class="form-label">Observações:</label>
-        <input type="text" id="obs" th:field="*{observacoes}" class="form-control">
-    </div>
+                                    </div>
+                                    <div class="col-md-6 mb-4">
 
-    <input type="submit" value="Enviar">
+                                        <div class="form-outline">
+                                            <h6 for="email" class="form-label">E-mail:</h6>
+                                            <input type="text" id="email" th:field="*{email}" class="form-control" required>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-4 d-flex align-items-center">
+
+                                        <div class="form-outline datepicker w-100">
+                                            <h6 for="telefone" class="form-label">Telefone:</h6>
+                                            <input type="text" id="telefone" th:field="*{telefone}" class="form-control" required>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+                                        <h6 for="cargo" class="form-label">Cargo desejado:</h6>
+                                        <input type="text" id="cargo" th:field="*{cargo_desejado}" class="form-control" required>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-4 d-flex align-items-center">
+
+                                        <div class="form-outline datepicker w-100">
+                                            <h6 for="categoria" class="form-label">Escolaridade:</h6>
+                                            <select id="categoria" th:field="*{escolaridade}" class="form-select" required>
+                                                <option value="">...</option>
+                                                <option value="Ensino Fundamental Incompleto">Ensino Fundamental Incompleto</option>
+                                                <option value="Ensino Fundamental Cursando">Ensino Fundamental Cursando</option>
+                                                <option value="Ensino Fundamental Completo">Ensino Fundamental Completo</option>
+                                                <option value="Ensino Médio Incompleto">Ensino Médio Incompleto</option>
+                                                <option value="Ensino Médio Cursando">Ensino Médio Cursando</option>
+                                                <option value="Ensino Médio Completo">Ensino Médio Completo</option>
+                                                <option value="Formação Superior Incompleta">Formação Superior Incompleta</option>
+                                                <option value="Formação Superior Cursando">Formação Superior Cursando</option>
+                                                <option value="Formação Superior Completa">Formação Superior Completa</option>
+                                                <option value="Pós-graduação no nível Especialização">Pós-graduação no nível Especialização</option>
+                                                <option value="Pós-graduação no nível Mestrado">Pós-graduação no nível Mestrado</option>
+                                                <option value="Pós-graduação no nível Dotourado">Pós-graduação no nível Dotourado</option>
+                                                <option value="outro">Outro</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-outline datepicker w-100">
+                                            <h6 for="arquivo" class="form-label">Arquivo:</h6>
+                                            <input type="file" class="form-control" id="arquivo" name="arquivo" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="form-outline datepicker w-100">
+                                            <h6 class="form-label">Observações:</h6>
+                                            <textarea rows="10" cols="100" type="text" id="obs" th:field="*{observacoes}" class="form-control w-100"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class=" row justify-content-center align-items-center h-100 mt-4 pt-2">
+                                        <input class=" btn btn-outline-primary btn-lg" type="submit" value="Enviar" />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </form>
-
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 </body>
 </html>

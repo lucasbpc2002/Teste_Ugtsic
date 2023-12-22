@@ -33,8 +33,7 @@ public class Curriculo {
 
     private String observacoes;
 
-    @Lob
-    private byte[] file;
+    private String arquivo;
 
     private String ipAddress;
 
