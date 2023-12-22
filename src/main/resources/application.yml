@@ -4,7 +4,7 @@ spring:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/postgres?serverTimezone=UTC
     username: postgres
-    password: postgres
+    password: ivqcd4ig
   jpa:
     properties:
       hibernate:

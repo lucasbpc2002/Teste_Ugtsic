@@ -25,7 +25,6 @@
 </head>
 
 <body class="masthead">
-
 <form th:object="${curriculo}" th:action="@{/curriculo/submit}" method="post" enctype="multipart/form-data">
     <section >
         <div class="container py-5 h-100">
@@ -92,16 +91,16 @@
                                             </select>
                                         </div>
 
-                                        <div class="form-outline datepicker w-100">
-                                            <h6 for="arquivo" class="form-label">Arquivo:</h6>
-                                            <input type="file" class="form-control" id="arquivo" name="arquivo" required>
-                                        </div>
                                     </div>
 
+                                    <div class="col-md-6 mb-4">
+                                        <h6 for="exampleFormControlInput3" class="form-label">Arquivo do currículo:</h6>
+                                        <input type="file" name="arquivo" class="form-control" id="exampleFormControlInput4" placeholder="" accept=".doc, .docx, .pdf" required/>
+                                    </div>
                                     <div class="row">
 
                                         <div class="form-outline datepicker w-100">
-                                            <h6 class="form-label">Observações:</h6>
+                                            <h6 class="form-label">observações:</h6>
                                             <textarea rows="10" cols="100" type="text" id="obs" th:field="*{observacoes}" class="form-control w-100"></textarea>
                                         </div>
                                     </div>
@@ -109,7 +108,7 @@
                                     <div class=" row justify-content-center align-items-center h-100 mt-4 pt-2">
                                         <input class=" btn btn-outline-primary btn-lg" type="submit" value="Enviar" />
                                     </div>
-                                </div>
+                                    <!--accept=".doc, .docx, .pdf" required-->
                             </form>
                         </div>
                     </div>
